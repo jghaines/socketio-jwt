@@ -19,6 +19,9 @@ io.sockets
   })).on('authenticated', function(socket) {
     //this socket is authenticated, we are good to handle more events from it.
     console.log('hello! ' + socket.decoded_token.name);
+  }).on('unauthorized', function(msg){
+    console.log("unauthorized: " + JSON.stringify(msg.data));
+    throw new Error(msg.data.type);
   });
 ```
 
